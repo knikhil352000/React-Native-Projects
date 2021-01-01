@@ -1,10 +1,13 @@
 import React from 'react'
-import { View, Text, StyleSheet } from 'react-native'
+import { View, Text, StyleSheet, Button } from 'react-native'
+import { globalStyles } from '../styles/global'
 
 export default function Home() {
+    const pressHandler = () => 
     return (
         <View style={styles.container}>
-            <Text style={styles.titleText}>Home Screen</Text>
+            <Text style={globalStyles.titleText}>Home Screen</Text>
+            <Button title='Go Back' onPress={pressHandler}/>
         </View>
     )
 }
@@ -12,10 +15,11 @@ export default function Home() {
 const styles = StyleSheet.create({
     container: {
         padding: 100,
-    },
-    titleText:{
-        fontFamily:'nunito-bold',
+        borderWidth:1,
+        borderColor:'red'
+    }, 
+    titleText:{  
+        // fontFamily:'nunito-bold',
         fontSize:18
-
     }
 })
