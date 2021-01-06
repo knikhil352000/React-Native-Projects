@@ -6,6 +6,7 @@ import * as Font from 'expo-font';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import About from '../screens/About'
+import Header from '../shared/Header'
 export default function AboutStack() {
     const Stack = createStackNavigator();
     return (
@@ -14,7 +15,7 @@ export default function AboutStack() {
             headerStyle: {
             backgroundColor: '#f4511e',
             }}}>
-            <Stack.Screen name="About" component={About} />
+            <Stack.Screen name="About" component={About}  options={({navigation, route}) => ({ headerTitle : () => <Header navigation={navigation} title='About'/>})}  />
             
         </Stack.Navigator>
     )

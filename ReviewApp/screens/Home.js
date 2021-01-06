@@ -4,7 +4,7 @@ import { View, Text, StyleSheet, Button } from 'react-native'
 import { FlatList, TouchableOpacity } from 'react-native-gesture-handler'
 import { globalStyles } from '../styles/global'
 import ReviewDetails from './ReviewDetails'
-
+import {Ionicons} from '@expo/vector-icons';
 
 export default function Home({navigation}) {
     const [reviews, setReviews] = useState([
@@ -20,6 +20,7 @@ export default function Home({navigation}) {
                 renderItem={({item}) => (
                     <TouchableOpacity onPress={() => navigation.navigate('ReviewDetails', item)}>
                         <Text style={globalStyles.titleText}>{ item.title }</Text>
+                    
                     </TouchableOpacity>
                 )}
             />
@@ -31,11 +32,12 @@ const styles = StyleSheet.create({
     container: {
         padding: 10,
         borderWidth:1,
-        borderColor:'red'
+        borderColor:'red',
     }, 
     titleText:{  
         // fontFamily:'nunito-bold',
-        fontSize:18
+        fontSize:18,
+        borderRadius: 10
     }
 })
 

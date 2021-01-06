@@ -14,7 +14,8 @@ export const globalStyles = StyleSheet.create({
         marginVertical:5,
         width: 'auto',
         borderWidth: 1,
-        borderColor: 'red'
+        borderColor: 'red',
+        borderRadius: 10
     },
     paragraph: {
         marginVertical: 8,
