@@ -18,6 +18,20 @@ export const globalStyles = StyleSheet.create({
     paragraph: {
         marginVertical: 8,
         lineHeight: 20
+    },
+    input: {
+        borderWidth: 1,
+        borderColor: "#ddd",
+        padding: 10,
+        fontSize:18,
+        borderRadius: 6,
+        elevation: 3,
+        backgroundColor: '#fff',
+        shadowColor: '#333',
+        shadowOffset: {width : 1, height: 1},
+        shadowOpacity: 0.3,
+        shadowRadius: 2,
+        marginVertical: 4,
     }
 });
 

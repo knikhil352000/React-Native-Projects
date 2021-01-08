@@ -18,7 +18,7 @@ export default function ReviewDetails(props) {
                     <Image source={images.ratings[item.rating]} />
                 </View>
             </Card>
-        </View>
+        </View> 
     )
 }
 

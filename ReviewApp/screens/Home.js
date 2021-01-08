@@ -1,11 +1,13 @@
 import { NavigationContainer } from '@react-navigation/native'
 import React, {useState} from 'react'
-import { View, Text, StyleSheet, Button, Modal } from 'react-native'
-import { FlatList, TouchableOpacity } from 'react-native-gesture-handler'
+import { View, Text, StyleSheet, Button, Modal, Keyboard } from 'react-native'
+import { FlatList, TouchableOpacity, TouchableWithoutFeedback } from 'react-native-gesture-handler'
 import { globalStyles } from '../styles/global'
 import ReviewDetails from './ReviewDetails'
 import {MaterialIcons} from '@expo/vector-icons';
 import Card from '../shared/Card'
+import ReviewForm from './ReviewForm'
+
 export default function Home({navigation}) {
     const [modalOpen, setModalOpen] = useState(false);
     const [reviews, setReviews] = useState([
@@ -14,16 +16,27 @@ export default function Home({navigation}) {
         {title: 'Return of Me', rating: 3, body: 'lorem ipsum', key: '3'}
 
     ])
+
+    const addReview = (review) => {
+        review.key = Math.random().toString();
+        setReviews((currentReviews) => {
+            return [review, ...currentReviews]
+        })
+        setModalOpen(false);
+    }
+
     return (
         <View style={styles.container}>
+            
             <Modal visible={modalOpen} animationType='slide'>
-            <MaterialIcons name='close' size={18} color='blue' style={styles.icon} onPress={() => setModalOpen(false)}/>
-                <View style={StyleSheet.modalContent}>
-                    <Text>Hello from the modal</Text>
-                </View>
-                
+                {/* <TouchableWithoutFeedback> */}
+                    <MaterialIcons name='close' size={33} color='black' style={styles.icon} onPress={() => setModalOpen(false)}/>
+                    <View style={StyleSheet.modalContent}>
+                    </View>
+                    <ReviewForm addReview={addReview}/>
+                {/* </TouchableWithoutFeedback> */}
             </Modal>
-            <MaterialIcons name='add' size={18} color='blue' style={styles.icon} onPress={() => setModalOpen(true)}/>
+            <MaterialIcons name='add' size={33} color='black' style={styles.icon} onPress={() => setModalOpen(true)}/>
             <FlatList 
                 data={reviews}
                 renderItem={({item}) => (
@@ -42,18 +55,12 @@ const styles = StyleSheet.create({
     container: {
         padding: 10,
         width:'100%',
-        // alignItems: 'center'
     }, 
     titleText:{  
         fontSize:18,
         borderRadius: 10
     },
     icon: {
-        borderWidth: 1,
-        height: 24,
-        width: 24,
-        borderColor: 'blue',
-        // marginLeft:'48%'
         alignSelf: 'center',
         marginTop: 10
     }

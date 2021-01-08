@@ -8,7 +8,7 @@ export default function Header({navigation, title}) {
     }
     return (
         <ImageBackground style={styles.header}>
-            <MaterialIcons name='menu' size={18} color='blue' style={styles.icon} onPress={openMenu}/>
+            <MaterialIcons name='menu' size={33} color='black' style={styles.icon} onPress={openMenu}/>
             <View style={styles.headerTitle}>
                 <Image style={styles.headerImage} source={require('../assets/heart_logo.png')} />
                 <Text style={styles.headerText}>{title}</Text>
@@ -32,9 +32,7 @@ const styles = StyleSheet.create({
         letterSpacing: 1
     },
     icon: {
-        borderWidth: 1,
-        height: 24,
-        width: 24,
+        // borderWidth: 1,
         borderColor: 'blue',
         position: 'absolute',
         left: 16,

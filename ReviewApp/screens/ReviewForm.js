@@ -2,13 +2,14 @@ import React from 'react'
 import { StyleSheet, Button, TextInput, View, Text } from 'react-native'
 import { Formik } from 'formik';
 import { globalStyles } from '../styles/global.js'
-export default function ReviewForm() {
+export default function ReviewForm({addReview}) {
     return (
-        <View>
+        <View style={globalStyles.container}>
             <Formik
                 initialValues={{title: '', body: '', rating: ''}}
-                onSubmit={(values) => {
-                    
+                onSubmit={(values, actions) => {
+                    actions.resetForm();
+                    addReview(values);
                 }}
             >
                 {(formikProps) => (
@@ -31,9 +32,12 @@ export default function ReviewForm() {
                         placeholder='Rating (1 - 5)' 
                         onChangeText={formikProps.handleChange('rating')} 
                         value={formikProps.values.rating}
+                        keyboardType='numeric'
                        />
-
-                       <Button title='submit' color='maroon' onPress={formikProps.handleSubmit}/>
+                        <View style={{width : '50%', marginTop: 20,marginLeft:'25%'}}>
+                            <Button title='submit' color='coral' onPress={formikProps.handleSubmit} />
+                        </View>
+                       
 
                    </View> 
                 )}
