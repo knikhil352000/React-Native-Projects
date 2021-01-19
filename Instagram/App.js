@@ -6,6 +6,12 @@ import { createStackNavigator } from '@react-navigation/stack';
 import LandingScreen from './components/auth/Landing';
 import Register from './components/auth/Register';
 import * as firebase from 'firebase';
+import {Provider} from 'react-redux';
+import {createStore, applyMiddleware} from 'redux'
+import rootReducer from './redux/reducers'
+import MainScreen from './components/Main'
+const thunk = require('redux-thunk').default;
+const store = createStore(rootReducer, applyMiddleware(thunk))
 const Stack = createStackNavigator();
 const firebaseConfig = {
   apiKey: "AIzaSyDzQ7sC4Mf-MTBoTF6GA2eyxJwi8jlarmA",
@@ -51,9 +57,12 @@ export default function App() {
     );
   }
   return(
-    <View style={{flex: 1, justifyContent: 'center', alignItems:'center'}}>
-        <Text>User is loggedIn</Text>
-    </View>
+    <Provider store={store}>
+      <NavigationContainer>
+        <Stack.Navigator initialRouteName='Main'>
+          <Stack.Screen name='MainScreen' component={MainScreen} options={{ headerShown: false}}/>
+        </Stack.Navigator>
+      </NavigationContainer>
+    </Provider>
   )
-   
 }  
