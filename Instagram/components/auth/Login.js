@@ -2,12 +2,12 @@ import React,{useState} from 'react'
 import { Button, View } from 'react-native'
 import { TextInput } from 'react-native-gesture-handler';
 import firebase from 'firebase'
-export default function Register() {
+export default function Login() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [name, setName] = useState('');
+    // const [name, setName] = useState('');
     const onSignUp = () => {
-        firebase.auth().createUserWithEmailAndPassword(email, password)
+        firebase.auth().signInWithEmailAndPassword(email, password)
             .then((result) => {
                 console.log(result);
             })
@@ -18,11 +18,6 @@ export default function Register() {
     
     return (
         <View>
-            <TextInput
-                placeholder='Name'
-                onChangeText={(name) => setName(name)}
-                value={name}
-            />
             <TextInput
                 placeholder='Email'
                 onChangeText={(email) => setEmail(email)}
@@ -36,7 +31,7 @@ export default function Register() {
             />
             <Button 
                 onPress={() => onSignUp()}
-                title='Sign Up'
+                title='Login'
             />
         </View>
     )

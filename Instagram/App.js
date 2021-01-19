@@ -5,16 +5,15 @@ import {NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack';
 import LandingScreen from './components/auth/Landing';
 import Register from './components/auth/Register';
-require('dotenv').config()
 import * as firebase from 'firebase';
 const Stack = createStackNavigator();
 const firebaseConfig = {
-  apiKey: process.env.API_KEY,
-  authDomain: process.env.AUTH_DOMAIN,
-  projectId: process.env.PROJECTID,
-  storageBucket: process.env.STORAGE_BUCKET,
-  messagingSenderId: process.env.MESSAGING_SENDER_ID,
-  appId: process.env.APP_ID
+  apiKey: "AIzaSyDzQ7sC4Mf-MTBoTF6GA2eyxJwi8jlarmA",
+  authDomain: "instagram-react-native-a84d2.firebaseapp.com",
+  projectId: "instagram-react-native-a84d2",
+  storageBucket: "instagram-react-native-a84d2.appspot.com",
+  messagingSenderId: "170442662878",
+  appId: "1:170442662878:web:7fdf3f04b4a75dc906734f"
 };
 if(firebase.apps.length === 0) {
   firebase.initializeApp(firebaseConfig);
@@ -24,6 +23,7 @@ export default function App() {
     <NavigationContainer>
       <Stack.Navigator initialRouteName='Landing'>
         <Stack.Screen name='Landing' component={LandingScreen} options={{ headerShown: false}}/>
+        <Stack.Screen name='Register' component={Register} />
 
       </Stack.Navigator>
     </NavigationContainer>
