@@ -12,10 +12,10 @@ const Main = ({ fetchUser, currentUser }) => {
     })
     // console.log(currentUser);
     return (
-        <Tav.Navigator>
+        <Tab.Navigator>
             <Tab.Screen name='Feed' component={Feed}/>
             {/* <Tab.Screen name='Settings' component={SettingsScreen} /> */}
-        </Tav.Navigator>
+        </Tab.Navigator>
     )
 }
 
