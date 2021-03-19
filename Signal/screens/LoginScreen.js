@@ -1,18 +1,43 @@
-import React from 'react'
-import { StyleSheet, Text, View } from 'react-native'
-import { StatusBar } from 'react-native'
+import React,{ useState } from 'react'
+import { StyleSheet, Text, View, Keyboard } from 'react-native'
+import { StatusBar, KeyboardAvoidingView } from 'react-native'
 import { Button, Input, Image } from 'react-native-elements'
 
-const LoginScreen = () => {
+const LoginScreen = ({ navigation }) => {
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("")
+    const signIn = () => {
+
+    }
     return (
-        <View>
+        <KeyboardAvoidingView behavior='padding' style={styles.container}>
             <StatusBar style='light'/>
-            <Image source={{
+            <Image 
+                onPress={Keyboard.dismiss}
+                source={{
                 uri: 'https://blog.mozilla.org/internetcitizen/files/2018/08/signal-logo.png'
             }}
                 style={{ width: 200, height: 200}} 
             />
-        </View>
+            <View style={styles.inputContainer}>
+                <Input
+                    placeholder='Email'
+                    autofocus
+                    onChangeText={(email) => setEmail(email)}
+                    value={email}
+                />
+                <Input 
+                    placeholder='Password'
+                    secureTextEntry
+                    type='password'
+                    onChangeText={(text) => setPassword(text)}
+                    value={password}
+                />
+            </View>
+
+            <Button containerStyle={styles.button} title='Login' onPress={signIn} />
+            <Button onPress={() => navigation.navigate('Register')} type='outline' containerStyle={styles.button} title='Register' />
+        </KeyboardAvoidingView>
     )
 }
 
@@ -21,8 +46,16 @@ export default LoginScreen
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#fff',
         alignItems: 'center',
-        justifyContent: 'center',
-      },
+        justifyContent:  'center',
+        padding: 10,
+        backgroundColor: 'white'    
+    },
+    inputContainer: {
+        width: 300
+    },
+    button: {
+        width: 300,
+        marginTop: 10,
+    }
 })

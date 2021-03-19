@@ -5,6 +5,7 @@ import { NavigationContainer } from '@react-navigation/native'
 import { StyleSheet, Text, View } from 'react-native';
 import LoginScreen from './screens/LoginScreen';
 import { createStackNavigator } from '@react-navigation/stack'
+import RegisterScreen from './screens/RegisterScreen';
 
 const Stack = createStackNavigator();
 
@@ -24,6 +25,12 @@ export default function App() {
           }}
           name='Login'
           component={LoginScreen} />
+        <Stack.Screen 
+          options={{
+            headerTitleAlign: 'center'
+          }}
+          name='Register'
+          component={RegisterScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
