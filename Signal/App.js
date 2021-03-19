@@ -21,7 +21,8 @@ export default function App() {
       <Stack.Navigator screenOptions={globalScreenOptions}>
         <Stack.Screen 
           options={{
-            headerTitleAlign: 'center'
+            headerTitleAlign: 'center',
+            headerBackTitle: 'Login'
           }}
           name='Login'
           component={LoginScreen} />
