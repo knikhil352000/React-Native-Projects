@@ -1,4 +1,5 @@
 import { StatusBar } from 'expo-status-bar'
+import { auth } from '../firebase'
 import React, {useState, useLayoutEffect} from 'react'
 import { StyleSheet, View, KeyboardAvoidingView, Keyboard } from 'react-native'
 import { Input, Button, Text } from 'react-native-elements'
@@ -8,7 +9,15 @@ const RegisterScreen = ({ navigation }) => {
     const [password, setPassword] = useState("");
     const [imageUrl, setImageUrl] = useState("");
     const register = () => {
-
+        auth.createUserWithEmailAndPassword(email, password)
+        .then(authUser => {
+            authUser.user.updateProfile({
+                displayName: name,
+                photoUrl: imageUrl ||
+                        'https://cencup.com/wp-content/uploads/2019/07/avatar-placeholder.png'
+            })
+        })
+        .catch((error) => alert(error.message))
     }
 
     return (

@@ -1,4 +1,5 @@
-import React,{ useState } from 'react'
+import { auth } from '../firebase'
+import React,{ useState, useEffect } from 'react'
 import { StyleSheet, Text, View, Keyboard } from 'react-native'
 import { StatusBar, KeyboardAvoidingView } from 'react-native'
 import { Button, Input, Image } from 'react-native-elements'
@@ -9,6 +10,15 @@ const LoginScreen = ({ navigation }) => {
     const signIn = () => {
 
     }
+    useEffect(() => {
+        const unsubscribe = auth.onAuthStateChanged((authUser) => {
+            console.log(authUser)
+            if(authUser) {
+                navigation.replace('Home');
+            }
+        })
+        return unsubscribe;
+    }, [])
     return (
         <KeyboardAvoidingView behavior='padding' style={styles.container}>
             <StatusBar style='light'/>
