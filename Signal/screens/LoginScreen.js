@@ -8,7 +8,7 @@ const LoginScreen = ({ navigation }) => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("")
     const signIn = () => {
-
+        auth.signInWithEmailAndPassword(email, password).catch(error => alert(error.message));
     }
     useEffect(() => {
         const unsubscribe = auth.onAuthStateChanged((authUser) => {
@@ -42,10 +42,11 @@ const LoginScreen = ({ navigation }) => {
                     type='password'
                     onChangeText={(text) => setPassword(text)}
                     value={password}
+                    onSubmitEditing={signin}
                 />
             </View>
 
-            <Button containerStyle={styles.button} title='Login' onPress={signIn} />
+            <Button containerStyle={styles.button} onPress={signIn} title='Login' onPress={signIn} />
             <Button onPress={() => navigation.navigate('Register')} type='outline' containerStyle={styles.button} title='Register' />
         </KeyboardAvoidingView>
     )
