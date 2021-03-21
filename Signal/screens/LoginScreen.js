@@ -42,7 +42,7 @@ const LoginScreen = ({ navigation }) => {
                     type='password'
                     onChangeText={(text) => setPassword(text)}
                     value={password}
-                    onSubmitEditing={signin}
+                    onSubmitEditing={signIn}
                 />
             </View>
 
