@@ -1,10 +1,17 @@
-import React, { useLayoutEffect } from 'react'
-import { View, Text, TouchableOpacity } from 'react-native'
+import React, { useLayoutEffect, useState } from 'react'
+import { View, Text, TouchableOpacity, StyleSheet, ScrollView, TextInput, Platform } from 'react-native'
 import { Avatar } from 'react-native-elements'
 import { AntDesign } from '@expo/vector-icons'
 import { FontAwesome } from '@expo/vector-icons'
 import { Ionicons } from '@expo/vector-icons'; 
+import { SafeAreaView } from 'react-native'
+import { StatusBar } from 'expo-status-bar'
+import { KeyboardAvoidingView } from 'react-native'
 const ChatScreen = ({ navigation, route }) => {
+    const [input, setInput] = useState('')
+    const sendMessage = () => {
+
+    }
     useLayoutEffect(() => {
         navigation.setOptions({
             headerTitleAlign: 'left',
@@ -42,11 +49,46 @@ const ChatScreen = ({ navigation, route }) => {
             )
         })
     }, [navigation])
+    
+
+
     return (
-        <View>
-            <Text>{route.params.chatName}</Text>
-        </View>
+        <SafeAreaView>
+            <StatusBar style='light' />
+            <KeyboardAvoidingView
+                style={styles.container}
+                keyboardVerticalOffset={90}
+            >
+                <ScrollView style={{flex: 1}}>
+        
+                </ScrollView>
+                <View
+                    style={styles.footer}
+                >   
+                    <TextInput value={input} onChangeText={(text) => setInput(text)} placeholder='Signal Message' style={styles.textInput}/>
+                    <TouchableOpacity onPress={sendMessage} activeOpacity={0.5}>
+                        <Ionicons name='send' size={24} color='#2b68e6'/>
+                    </TouchableOpacity>
+                </View>
+            </KeyboardAvoidingView>
+        </SafeAreaView>
     )
 }
 
 export default ChatScreen
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        justifyContent: 'flex-end'
+    },
+    footer: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        width: '100%',
+        padding: 15,
+        // position: 'absolute',
+        // bottom: 0
+    },
+    textInput: {}
+})
