@@ -1,5 +1,5 @@
 import React, { useLayoutEffect, useState } from 'react'
-import { View, Text, TouchableOpacity, StyleSheet, ScrollView, TextInput, Platform } from 'react-native'
+import { View, Text, TouchableOpacity, StyleSheet, ScrollView, TextInput, Platform, Keyboard } from 'react-native'
 import { Avatar } from 'react-native-elements'
 import { AntDesign } from '@expo/vector-icons'
 import { FontAwesome } from '@expo/vector-icons'
@@ -10,7 +10,7 @@ import { KeyboardAvoidingView } from 'react-native'
 const ChatScreen = ({ navigation, route }) => {
     const [input, setInput] = useState('')
     const sendMessage = () => {
-
+        Keyboard.dismiss();
     }
     useLayoutEffect(() => {
         navigation.setOptions({
@@ -53,18 +53,16 @@ const ChatScreen = ({ navigation, route }) => {
 
 
     return (
-        <SafeAreaView>
+        <SafeAreaView style={styles.container}>
             <StatusBar style='light' />
             <KeyboardAvoidingView
                 style={styles.container}
                 keyboardVerticalOffset={90}
             >
-                <ScrollView style={{flex: 1}}>
+                <ScrollView>
         
                 </ScrollView>
-                <View
-                    style={styles.footer}
-                >   
+                <View style={styles.footer}>   
                     <TextInput value={input} onChangeText={(text) => setInput(text)} placeholder='Signal Message' style={styles.textInput}/>
                     <TouchableOpacity onPress={sendMessage} activeOpacity={0.5}>
                         <Ionicons name='send' size={24} color='#2b68e6'/>
@@ -80,15 +78,21 @@ export default ChatScreen
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        justifyContent: 'flex-end'
     },
     footer: {
         flexDirection: 'row',
         alignItems: 'center',
         width: '100%',
         padding: 15,
-        // position: 'absolute',
-        // bottom: 0
     },
-    textInput: {}
+    textInput: {
+        bottom: 0,
+        height: 40,
+        flex: 1,
+        marginRight: 15,
+        backgroundColor: '#ececec',
+        padding: 10,
+        color: 'grey',
+        borderRadius: 30,
+    }
 })
