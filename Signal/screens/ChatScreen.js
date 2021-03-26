@@ -7,10 +7,21 @@ import { Ionicons } from '@expo/vector-icons';
 import { SafeAreaView } from 'react-native'
 import { StatusBar } from 'expo-status-bar'
 import { KeyboardAvoidingView } from 'react-native'
+import * as firebase from 'firebase'
+import { db, auth } from '../firebase'
 const ChatScreen = ({ navigation, route }) => {
     const [input, setInput] = useState('')
+    const [messages, setMessages] = useState([])
     const sendMessage = () => {
         Keyboard.dismiss();
+        db.collection('chats').doc(route.params.id).collection('messages').add({
+            timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+            message: input,
+            displayName: auth.currentUser.displayName,
+            email: auth.currentUser.email,
+            photoURL: auth.currentUser.photoURL
+        })
+        setInput('');
     }
     useLayoutEffect(() => {
         navigation.setOptions({
@@ -50,6 +61,17 @@ const ChatScreen = ({ navigation, route }) => {
         })
     }, [navigation])
     
+    useLayoutEffect(() => {
+        const unsubscribe = db.collection('chats')
+                            .doc(route.params.id)
+                            .collection('messages').orderBy('timestamp', 'desc')
+                            .onSnapshot(snapshot => setMessages(
+                                snapshot.docs.map(doc => ({
+                                    id: doc.id,
+                                    data: doc.data()
+                                }))
+                            ))
+    })
 
 
     return (
@@ -63,7 +85,13 @@ const ChatScreen = ({ navigation, route }) => {
         
                 </ScrollView>
                 <View style={styles.footer}>   
-                    <TextInput value={input} onChangeText={(text) => setInput(text)} placeholder='Signal Message' style={styles.textInput}/>
+                    <TextInput 
+                        value={input} 
+                        onChangeText={(text) => setInput(text)} 
+                        onSubmitEditing={sendMessage}
+                        placeholder='Signal Message' 
+                        style={styles.textInput}
+                    />
                     <TouchableOpacity onPress={sendMessage} activeOpacity={0.5}>
                         <Ionicons name='send' size={24} color='#2b68e6'/>
                     </TouchableOpacity>
